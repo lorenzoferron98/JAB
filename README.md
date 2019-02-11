@@ -12,8 +12,8 @@ l'interfacciamento con le due classi sopracitate è <i>GUI</i>.
 </p>
 
 Si allega alla presente documentazione:
-* l'eseguibile *JAB.jar*;
-* la cartella *lib/*, nella quale sono contenute le librerie usate nel progetto;
+* l'eseguibile *JAB.jar*
+* la cartella *lib/*, nella quale sono contenute le librerie usate nel progetto
 * le *resources* nelle directory *src* e *test* per provare il programma con un *dataset* già definito
 * [link](https://github.com/lorenzoferron98/JAB) al progetto GitHub
 
