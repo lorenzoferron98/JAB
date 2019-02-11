@@ -97,7 +97,7 @@ struttura (`ArrayList`), che conserva gli appuntamenti. Essa infatti potrebbe es
 dalla classe `Book`.
 
 
-##GUI
+## GUI
 La realizzazzione dell'interfaccia testuale è avvenuta facendo uso dell'[ASCII art](https://it.wikipedia.org/wiki/ASCII_art)
 e del [Box-drawing character](https://en.wikipedia.org/wiki/Box-drawing_character). Quest'ultimo aspetto è stato facilitato
 grazie all'uso di una [libreria](https://github.com/vdmeer/asciitable), i cui file sono contenuti nella directory *lib/*. <br>
