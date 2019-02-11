@@ -105,3 +105,6 @@ hs_err_pid*
 .idea/vcs.xml
 JAB.iml
 src/META-INF/
+JAB_rev2.iml
+lib/
+test/resources/
