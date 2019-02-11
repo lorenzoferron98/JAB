@@ -6,7 +6,7 @@ import de.vandermeer.asciitable.CWC_LongestLine;
 import de.vandermeer.asciithemes.u8.U8_Grids;
 import de.vandermeer.skb.interfaces.document.TableRowStyle;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-import jab.jbook.util.Input;
+import jab.jbook.util.InputUtils;
 import jab.models.Appointment;
 import jab.models.Book;
 import org.apache.commons.lang3.SystemUtils;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Lorenzo Ferron
- * @version %G%
+ * @version 2018.02.11
  * @see Appointment
  * @see Book
  */
@@ -146,7 +146,7 @@ public class GUI {
         do {
             try {
                 String subExitQuery = subMenu ? ", 0 to quit" : "";
-                choice = Input.readInt("Enter a number [1-" + end + subExitQuery + "]: ");
+                choice = InputUtils.readInt("Enter a number [1-" + end + subExitQuery + "]: ");
                 if (choice < 0 || choice > end || !subMenu && choice == 0) {
                     LOGGER.info("Number is not valid [1-" + end + subExitQuery + "]\n");
                     System.out.print("[Re-]");
@@ -202,7 +202,7 @@ public class GUI {
         } else {
             String choice;
             do {
-                choice = Input.readString("Do you want to close without saving the changes? [y/N] ");
+                choice = InputUtils.readString("Do you want to close without saving the changes? [y/N] ");
                 if (choice.toLowerCase().matches("y|n|yes|no") || choice.isEmpty()) {
                     System.out.println();
                 } else {
@@ -233,11 +233,11 @@ public class GUI {
             int choice = selectResult(results);
             try {
                 Appointment old = results.get(choice);
-                String date = Input.readString("Date[" + old.getDate().format(Appointment.FORMATTER_DATE) + "]: ");
-                String startTime = Input.readString("Start Time[" + old.getStartTime().format(Appointment.FORMATTER_TIME) + "]: ");
-                String duration = Input.readString("Duration (in minutes)[" + old.getDuration().toMinutes() + "]: ");
-                String description = Input.readString("Description (with)[" + old.getDescription() + "]: ");
-                String place = Input.readString("Place[" + old.getPlace() + "]: ");
+                String date = InputUtils.readString("Date[" + old.getDate().format(Appointment.FORMATTER_DATE) + "]: ");
+                String startTime = InputUtils.readString("Start Time[" + old.getStartTime().format(Appointment.FORMATTER_TIME) + "]: ");
+                String duration = InputUtils.readString("Duration (in minutes)[" + old.getDuration().toMinutes() + "]: ");
+                String description = InputUtils.readString("Description (with)[" + old.getDescription() + "]: ");
+                String place = InputUtils.readString("Place[" + old.getPlace() + "]: ");
                 Appointment newAppointment = book.edit(old, date, startTime, duration, description, place);
                 if (newAppointment == null) {
                     saved = false;
@@ -352,10 +352,10 @@ public class GUI {
             try {
                 switch (choose(2, true)) {
                     case 1:
-                        String date = Input.readString("Date: ");
+                        String date = InputUtils.readString("Date: ");
                         return book.search(Book.forDate(date));
                     case 2:
-                        String description = Input.readString("Description (with): ");
+                        String description = InputUtils.readString("Description (with): ");
                         return book.search(Book.forDescription(description));
                     default:
                         System.out.println();
@@ -396,7 +396,7 @@ public class GUI {
     }
 
     private void saveAsAction() {
-        String filename = Input.readString("Path [" + book.getFile() + "]: ");
+        String filename = InputUtils.readString("Path [" + book.getFile() + "]: ");
         book.setFile(filename.isEmpty() ? book.getFile().getAbsolutePath() : filename);
         saveAction();
     }
@@ -410,11 +410,11 @@ public class GUI {
         System.out.println("Main Menu > Insert a new appointment\n");
         System.out.println("* = required\n");
         try {
-            String date = Input.readString("Date* (dd-MM-yyyy): ");
-            String startTime = Input.readString("Start Time* (HH-mm): ");
-            int duration = Input.readInt("Duration* (in minutes): ");
-            String description = Input.readString("Description* (with): ");
-            String place = Input.readString("Place*: ");
+            String date = InputUtils.readString("Date* (dd-MM-yyyy): ");
+            String startTime = InputUtils.readString("Start Time* (HH-mm): ");
+            int duration = InputUtils.readInt("Duration* (in minutes): ");
+            String description = InputUtils.readString("Description* (with): ");
+            String place = InputUtils.readString("Place*: ");
             Appointment appointment = book.add(date, startTime, duration, description, place);
             if (appointment == null) {
                 saved = false;

@@ -13,7 +13,7 @@ import java.util.Locale;
  * The {@code Appointment} class represents an appointment into {@code Book}.
  *
  * @author Lorenzo Ferron
- * @version %G%
+ * @version 2018.02.11
  * @see Book
  */
 public final class Appointment implements Comparable<Appointment> {
@@ -89,8 +89,8 @@ public final class Appointment implements Comparable<Appointment> {
     }
 
     /**
-     * Checks that {@code str} does not contain any {@code SEPARARATOR} character or
-     * empty string.
+     * Checks that {@code str} does not contain any {@code SEPARARATOR} or empty
+     * string.
      *
      * @param str       the String to be tested
      * @param fieldName the String containing name of field to be tested
@@ -374,7 +374,7 @@ public final class Appointment implements Comparable<Appointment> {
     }
 
     /**
-     * Compares this object with the specified object for order.  Returns a
+     * Compares this object with the specified object to order.  Returns a
      * negative integer, zero, or a positive integer as this object is less
      * than, equal to, or greater than the specified object.
      *

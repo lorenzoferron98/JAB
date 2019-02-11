@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * Appointment scheduling software in CLI mode.
  *
  * @author Lorenzo Ferron
- * @version %G%
+ * @version 2018.02.11
  * @see Appointment
  */
 public class Book implements Iterable<Appointment> {
@@ -79,7 +79,7 @@ public class Book implements Iterable<Appointment> {
 
     /**
      * Returns a predicate that tests if a {@code description} is contained
-     * into an appointment according to {@link String#contains(CharSequence)}
+     * into an appointment according to {@link String#contains(CharSequence)}.
      *
      * @param description the String with which to compare
      * @return a predicate that tests if a {@code description} is contained into an

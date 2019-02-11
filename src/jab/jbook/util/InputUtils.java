@@ -3,6 +3,7 @@ package jab.jbook.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -10,12 +11,12 @@ import java.util.Vector;
  * dallo standard input.
  */
 
-final public class Input {
+final public class InputUtils {
 
     private static BufferedReader reader =
             new BufferedReader(new InputStreamReader(System.in));
 
-    private Input() {
+    private InputUtils() {
         // Empty body...
     }
 
@@ -191,7 +192,7 @@ final public class Input {
     }
 
     public static String[] readSeq(String prompt) {
-        Vector<String> seqTemp = new Vector<>();
+        List<String> seqTemp = new Vector<>();
         System.out.print(prompt);
         String inputString = readString();
         while (inputString.length() > 0) {

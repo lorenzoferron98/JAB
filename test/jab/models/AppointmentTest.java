@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * The test class {@code AppointmentTest}.
  *
  * @author Lorenzo Ferron
- * @version %G%
+ * @version 2018.02.11
  * @see Appointment
  */
 public class AppointmentTest {
