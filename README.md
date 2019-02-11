@@ -24,6 +24,9 @@ java -jar JAB.jar [filename]
 `filename` è il percorso del file (CSV) che può essere caricato nel programma. Eventuali parametri aggiuntivi, oltre a 
 `filename`, passati su linea di comando saranno ignorati.
 
+# Download
+Visit our [download page](https://github.com/lorenzoferron98/JAB/releases) for the lastest realese.
+
 # Scelte progettuali
 Nel seguito verrano brevemente discusse le scelte fatte per le classi citate nella sezione precedente.
 
