@@ -247,7 +247,7 @@ public final class Appointment implements Comparable<Appointment> {
      *                                  empty
      */
     public void setPlace(String place) throws IllegalArgumentException {
-        checkString(place, "Place", " field must not contain a SEPARETOR char (" + SEPARATOR + ")");
+        checkString(place, "Place", " field must not contain a SEPARATOR char (" + SEPARATOR + ")");
         this.place = place;
     }
 

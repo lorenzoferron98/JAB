@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * The {@code Book} represent a simply real Appointment Book.
@@ -46,7 +47,12 @@ public class Book implements Iterable<Appointment> {
 
     /**
      * Returns true if the {@code current} appointment does not overlap with its
-     * duration the {@code other}.
+     * duration to the {@code other}.
+     *
+     * <p>
+     * If {@code startInstant} and {@code endInstant} of two different appointment are
+     * the same, these appointments do not overlap.
+     * </p>
      *
      * @param current the current appointment
      * @param other   another appointment
@@ -239,9 +245,13 @@ public class Book implements Iterable<Appointment> {
      * @return a sorted clone of this book, not null
      */
     public List<Appointment> getSortedBook() {
-        List<Appointment> sortedBook = new ArrayList<>(book);
+        return book
+                .stream()
+                .sorted()
+                .collect(Collectors.toCollection(ArrayList::new));
+        /*List<Appointment> sortedBook = new ArrayList<>(book);
         Collections.sort(sortedBook);
-        return sortedBook;
+        return sortedBook;*/
     }
 
     /**
@@ -291,56 +301,6 @@ public class Book implements Iterable<Appointment> {
      */
     @Override
     public Iterator<Appointment> iterator() {
-        return new BookIterator();
-    }
-
-    private class BookIterator implements Iterator<Appointment> {
-        int cursor;         // index of next element to return
-        int lastRet = -1;   // index of last element returned; -1 if no such
-
-        /**
-         * Returns {@code true} if the iteration has more elements.
-         * (In other words, returns {@code true} if {@link #next} would
-         * return an element rather than throwing an exception.)
-         *
-         * @return {@code true} if the iteration has more elements
-         */
-        @Override
-        public boolean hasNext() {
-            return cursor != book.size();
-        }
-
-        /**
-         * Returns the next element in the iteration.
-         *
-         * @return the next element in the iteration
-         * @throws NoSuchElementException if the iteration has no more elements
-         */
-        @Override
-        public Appointment next() {
-            int i = cursor;
-            if (i >= book.size()) {
-                throw new NoSuchElementException();
-            }
-            cursor = i + 1;
-            return book.get(lastRet = i);
-        }
-
-        /**
-         * Removes from the underlying collection the last element returned
-         * by this iterator (optional operation).  This method can be called
-         * only once per call to {@link #next}.  The behavior of an iterator
-         * is unspecified if the underlying collection is modified while the
-         * iteration is in progress in any way other than by calling this
-         * method.
-         *
-         * @throws UnsupportedOperationException if the {@code remove}
-         *                                       operation is not supported by this iterator
-         *                                       {@link UnsupportedOperationException} and performs no other action.
-         */
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
+        return getSortedBook().iterator();
     }
 }

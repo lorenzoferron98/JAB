@@ -9,6 +9,7 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import jab.jbook.util.Input;
 import jab.models.Appointment;
 import jab.models.Book;
+import org.apache.commons.lang3.SystemUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,6 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+/**
+ * @author Lorenzo Ferron
+ * @version %G%
+ * @see Appointment
+ * @see Book
+ */
 public class GUI {
 
     private static final Logger LOGGER = Logger.getLogger(GUI.class.getName());
@@ -115,9 +122,17 @@ public class GUI {
 
     /**
      * This method clear the current screen
+     *
+     * <p>
+     * On Windows systems, ANSI escapecode are supported by PowerShell 6.0.
+     * </p>
      */
     private void clearScreen() {
-        System.out.print("\033[H\033[2J");
+        if (SystemUtils.IS_OS_WINDOWS) {
+            System.out.print("`e[H`e[2J");
+        } else {
+            System.out.print("\033[H\033[2J");
+        }
         System.out.flush();
     }
 

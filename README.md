@@ -5,7 +5,7 @@ bookings.
 <p style='text-align: justify;'>
 Il progetto è stato sviluppato seguendo il paradigma di programmazione orientata agli oggetti (OOP). Il programma 
 modella la realtà descritta assegnado ad ogni attore, coinvolto in essa, un ruolo ben definito e circoscritto dalle
-sue operazioni. <br>
+sue operazioni/azioni. <br>
 Il termine attore designa un componente, a volte semplificato, della realtà da descrivere, non necessariamente animato. 
 I principali attori individuati sono rappresentati dalle classi <i>Appointment</i> e <i>Book</i>. La classe che permette 
 l'interfacciamento con le due classi sopracitate è <i>GUI</i>.
@@ -38,12 +38,12 @@ public final class Appointment {
 ```
 Facendo uso dei medoti `public` *Setter* si validano e si assegnano i parametri per il nuovo oggetto. Si noti l'uso della
 *keyword* `final` nella definizone di classe, essa è stata necessaria perché si è fatto riferimento a metodi pubblici
-(*Setter*) nel construttore. Tale approccio è stato adottato per evitare codice ridontate, necessario per la correttezza
-dei parametri. <br>
+(*Setter*) nel construttore. Tale approccio è stato adottato per evitare codice ridontate,  che sarebbe stato necessario 
+per la correttezza dei parametri. <br>
 Generalmente l'uso di metodi pubblici o privati, i quali a loro volta referenziano i primi, nel costruttore è fortemente
 sconsigliato.
 
-Altre interessante implementazione riguarda i metodi:
+Altra interessante implementazione riguarda i metodi:
 ```java
 public final class Appointment {
     public Instant getStartInstant() {
@@ -70,8 +70,10 @@ public class Book {
 ```
 * Esso permette di mantenere una corrispondenza diretta, mediante l'uso di un `HashMap`, tra due appuntamenti che si 
 sovrappongono: uno dei due è presente in `book`, l'altro invece non può esserlo perché altrimenti l'agenda non sarebbe
-consistente con l'iserimento fatto dai metodi `add(...)`.
-
+consistente con l'inserimento fatto dai metodi `add(...)`. <br>
+Questo metodo deve stampare sul terminale, con `LOGGER`, gli eventuali errori di *parsing* del file perché altrimenti
+non vi sarebbe modo, all'eventuale metodo chiamante, di mostrarli **TUTTI**, a meno che non si faccia uso di qualche 
+struttura dati che li conservi.
 
 Si fa presente, in questo come in altri metodi, anche della classe `GUI`, l'uso di un `LOGGER`. Tale scelta è stata fatta
 per avere un maggior grado di dettaglio qualora il programma riscontri un errore. Tra i principali vantaggi dei logger si
@@ -79,10 +81,6 @@ ricordano la possibilità di disabilitarli e impostare il livello di errore. In 
 convenzione:
 * `LOGGEER.warning(msg)`: usato per errori gravi (esempio errore di *parsing* di un appuntamento);
 * `LOGGER.info(msg)`: errori non gravi (esempio scelta non corretta dell'operazione)
-
-Questo metodo deve stampare sul terminale, con `LOGGER`, gli eventuali errori di *parsing* del file perché altrimenti
-non vi sarebbe modo, all'eventuale metodo chiamante, di mostrarli **TUTTI**, a meno che non si faccia uso di qualche 
-struttura dati che li conservi.
 
 ```java
 public class Book {
@@ -105,7 +103,7 @@ Tuttavia quest'ultima non implementa un metodo per re-inizializzare la `AsciiTab
 oggetto. Per tale motivo si cerca di ridurre al minimo lo spreco di memoria istanziando un nuovo oggetto `AsciiTable` 
 solo quando il numero di colonne della tabella varia. Per ulteriori dettagli si veda 
 [documentazione](http://www.vandermeer.de/projects/skb/java/asciitable/apidocs/index.html) e si cerchi di capire la 
-differenza (visto il nome) tra i seguentoi metodi:
+differenza (visto il nome) tra i seguenti metodi:
 ```java
 public class GUI {
     // ======================================================
@@ -129,3 +127,15 @@ Per permettere una maggiore UX (*User Experience*) si è implementato il medoto 
 terminali o emulatori di terminale che supportano lo standard 
 [ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code). Windows 10 lo supporta nativamente solo dal 
 [2016](https://en.wikipedia.org/wiki/ANSI_escape_code#Windows).
+
+# Test
+Osservazioni sulle classi di test.
+
+## AppointmentTest
+Si sono evitati i test dei metodi *Getter*, perché banalmente verificati. Si è inoltre trascurato il test del costruttore 
+perché esso è realizzato per mezzo dei metodi *Setter* e quello del metodo `compareTo` perché fa uso dell'omonimo 
+definito nella classe `LocalDateTime`.
+
+## BookTest
+Nei test si assume che gli appuntamenti usati siano completi, corretti e privi di errori di *parsing*. Tale assunzione è 
+lecita visto che l'obbiettivo non è testare i metodi definiti in `Appointment`.
