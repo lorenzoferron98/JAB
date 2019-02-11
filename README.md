@@ -96,6 +96,7 @@ chiamante. La scelta implemenetativa verte sul fatto che non si vuole mostrare v
 struttura (`ArrayList`), che conserva gli appuntamenti. Essa infatti potrebbe essere modificata da operazioni non definite
 dalla classe `Book`.
 
+
 ##GUI
 La realizzazzione dell'interfaccia testuale è avvenuta facendo uso dell'[ASCII art](https://it.wikipedia.org/wiki/ASCII_art)
 e del [Box-drawing character](https://en.wikipedia.org/wiki/Box-drawing_character). Quest'ultimo aspetto è stato facilitato
