@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * The {@code Book} represent a simply real Appointment Book.
@@ -73,7 +72,7 @@ public class Book implements Iterable<Appointment> {
      * @throws DateTimeParseException if the text cannot be parsed to a date
      * @see Book#search(Predicate)
      */
-    public static Predicate<Appointment> forDate(String date) throws DateTimeParseException {
+    public static Predicate<Appointment> forDate(String date) {
         return p -> p.getDate().equals(LocalDate.parse(date, Appointment.FORMATTER_DATE));
     }
 
@@ -89,7 +88,7 @@ public class Book implements Iterable<Appointment> {
      * @see Book#search(Predicate)
      * @see Appointment#SEPARATOR
      */
-    public static Predicate<Appointment> forDescription(String description) throws IllegalArgumentException {
+    public static Predicate<Appointment> forDescription(String description) {
         Appointment.checkString(description, "Description", " field must not contain a SEPARATOR char (" + Appointment.SEPARATOR + ")");
         return p -> p.getDescription().toLowerCase().contains(description.toLowerCase());
     }
@@ -178,7 +177,7 @@ public class Book implements Iterable<Appointment> {
      *                                  parsable {@code Appointment}.
      * @see Appointment#Appointment(String, String, int, String, String)
      */
-    public Appointment add(String date, String startTime, int duration, String description, String place) throws DateTimeParseException, IllegalArgumentException {
+    public Appointment add(String date, String startTime, int duration, String description, String place) {
         return add(new Appointment(date, startTime, duration, description, place));
     }
 
@@ -245,13 +244,9 @@ public class Book implements Iterable<Appointment> {
      * @return a sorted clone of this book, not null
      */
     public List<Appointment> getSortedBook() {
-        return book
-                .stream()
-                .sorted()
-                .collect(Collectors.toCollection(ArrayList::new));
-        /*List<Appointment> sortedBook = new ArrayList<>(book);
+        List<Appointment> sortedBook = new ArrayList<>(book);
         Collections.sort(sortedBook);
-        return sortedBook;*/
+        return sortedBook;
     }
 
     /**
@@ -275,7 +270,7 @@ public class Book implements Iterable<Appointment> {
      * @throws IllegalArgumentException if the {@code String} does not contain a
      *                                  parsable {@code Appointment}.
      */
-    public Appointment edit(Appointment old, String date, String startTime, String duration, String description, String place) throws DateTimeParseException, IllegalArgumentException {
+    public Appointment edit(Appointment old, String date, String startTime, String duration, String description, String place) {
         Appointment newAppointment = new Appointment(date.isEmpty() ? old.getDate().format(Appointment.FORMATTER_DATE) : date,
                 startTime.isEmpty() ? old.getStartTime().format(Appointment.FORMATTER_TIME) : startTime,
                 duration.isEmpty() ? (int) old.getDuration().toMinutes() : Integer.parseInt(duration),

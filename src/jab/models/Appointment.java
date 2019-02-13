@@ -80,7 +80,7 @@ public final class Appointment implements Comparable<Appointment> {
      *                                  appointment time
      * @throws IllegalArgumentException if the duration is negative
      */
-    public Appointment(String date, String startTime, int duration, String description, String place) throws DateTimeParseException, IllegalArgumentException {
+    public Appointment(String date, String startTime, int duration, String description, String place) {
         setDate(date);
         setStartTime(startTime);
         setDuration(duration);
@@ -98,7 +98,7 @@ public final class Appointment implements Comparable<Appointment> {
      * @throws IllegalArgumentException if the {@code String} contains any
      *                                  {@code SEPARARATOR} or empty string
      */
-    public static void checkString(String str, String fieldName, String msg) throws IllegalArgumentException {
+    public static void checkString(String str, String fieldName, String msg) {
         if (str.isEmpty()) {
             throw new IllegalArgumentException(fieldName + " " + "must not be empty");
         }
@@ -134,7 +134,7 @@ public final class Appointment implements Comparable<Appointment> {
      *                                  parsable {@code Appointment}.
      * @see AppointmentParseException
      */
-    public static Appointment parse(String line) throws DateTimeParseException, IllegalArgumentException {
+    public static Appointment parse(String line) {
         if (line.contains("\n") || line.contains("\r")) {
             throw new AppointmentParseException("Two or more lines detected");
         }
@@ -160,7 +160,7 @@ public final class Appointment implements Comparable<Appointment> {
      * @param date the String containing the date representation to be parsed
      * @throws DateTimeParseException if the text cannot be parsed to a date
      */
-    public void setDate(String date) throws DateTimeParseException {
+    public void setDate(String date) {
         this.date = LocalDate.parse(date, FORMATTER_DATE);
     }
 
@@ -181,7 +181,7 @@ public final class Appointment implements Comparable<Appointment> {
      * @throws DateTimeParseException if the text cannot be parsed to an appointment
      *                                time
      */
-    public void setStartTime(String startTime) throws DateTimeParseException {
+    public void setStartTime(String startTime) {
         this.startTime = LocalTime.parse(startTime, FORMATTER_TIME);
     }
 
@@ -200,7 +200,7 @@ public final class Appointment implements Comparable<Appointment> {
      * @param duration the duration, measured in minutes
      * @throws IllegalArgumentException if the duration is negative
      */
-    public void setDuration(int duration) throws IllegalArgumentException {
+    public void setDuration(int duration) {
         if (duration <= 0) {
             throw new IllegalArgumentException("Sorry, " + duration + " is an invalid duration. Please enter only minutes (>0).");
         }
@@ -224,7 +224,7 @@ public final class Appointment implements Comparable<Appointment> {
      * @throws IllegalArgumentException if the text contains SEPARATOR string or is
      *                                  empty
      */
-    public void setDescription(String description) throws IllegalArgumentException {
+    public void setDescription(String description) {
         checkString(description, "Description", " field must not contain a SEPARATOR char (" + SEPARATOR + ")");
         this.description = description;
     }
@@ -246,7 +246,7 @@ public final class Appointment implements Comparable<Appointment> {
      * @throws IllegalArgumentException if the text contains SEPARATOR string or is
      *                                  empty
      */
-    public void setPlace(String place) throws IllegalArgumentException {
+    public void setPlace(String place) {
         checkString(place, "Place", " field must not contain a SEPARATOR char (" + SEPARATOR + ")");
         this.place = place;
     }
