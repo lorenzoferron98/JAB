@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Lorenzo Ferron
- * @version 2018.02.11
+ * @version 2019.02.11
  * @see Appointment
  * @see Book
  */

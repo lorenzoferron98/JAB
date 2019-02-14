@@ -13,7 +13,7 @@ import java.util.Locale;
  * The {@code Appointment} class represents an appointment into {@code Book}.
  *
  * @author Lorenzo Ferron
- * @version 2018.02.11
+ * @version 2019.02.11
  * @see Book
  */
 public final class Appointment implements Comparable<Appointment> {

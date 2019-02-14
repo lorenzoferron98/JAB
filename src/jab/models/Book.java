@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * Appointment scheduling software in CLI mode.
  *
  * @author Lorenzo Ferron
- * @version 2018.02.11
+ * @version 2019.02.11
  * @see Appointment
  */
 public class Book implements Iterable<Appointment> {
