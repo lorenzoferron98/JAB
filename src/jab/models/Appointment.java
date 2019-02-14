@@ -33,7 +33,7 @@ public final class Appointment implements Comparable<Appointment> {
     public static final DateTimeFormatter FORMATTER_DATE = DateTimeFormatter.ofPattern(FORMAT_DATE, Locale.ITALY).withResolverStyle(ResolverStyle.STRICT);
 
     /**
-     * The time format choosen
+     * The time format chosen
      */
     public static final String FORMAT_TIME = "HH-mm";
 
@@ -96,7 +96,7 @@ public final class Appointment implements Comparable<Appointment> {
      * @param fieldName the String containing name of field to be tested
      * @param msg       The error message for the exception.
      * @throws IllegalArgumentException if the {@code String} contains any
-     *                                  {@code SEPARARATOR} or empty string
+     *                                  {@code SEPARATOR} or empty string
      */
     public static void checkString(String str, String fieldName, String msg) {
         if (str.isEmpty()) {
@@ -138,7 +138,7 @@ public final class Appointment implements Comparable<Appointment> {
         if (line.contains("\n") || line.contains("\r")) {
             throw new AppointmentParseException("Two or more lines detected");
         }
-        String[] values = line.split("\\s?+[\\" + SEPARATOR + "\\s]++", -2);
+        String[] values = line.split("\\s?+[\\" + SEPARATOR + "\\s]++");
         if (values.length != ARGC) {
             throw new AppointmentParseException("Illegal parsing");
         }

@@ -124,7 +124,7 @@ public class GUI {
      * This method clear the current screen
      *
      * <p>
-     * On Windows systems, ANSI escapecode are supported by PowerShell 6.0.
+     * On Windows systems, ANSI escape code are supported by PowerShell 6.0.
      * </p>
      */
     private void clearScreen() {
@@ -228,7 +228,7 @@ public class GUI {
     }
 
     private void editAction() {
-        List<Appointment> results = methodsBasedOnSearch("Main Menu > Edit an existing appoitment");
+        List<Appointment> results = methodsBasedOnSearch("Main Menu > Edit an existing appointment");
         if (results != null && !results.isEmpty()) {
             int choice = selectResult(results);
             try {
@@ -262,9 +262,7 @@ public class GUI {
         if (results != null && !results.isEmpty()) {
             int choice = selectResult(results);
             try {
-                if (book.delete(results.get(choice))) {
-                    saved = false;
-                }
+                saved &= !book.delete(results.get(choice));
             } catch (IndexOutOfBoundsException e) {
                 if (choice != -1) {
                     LOGGER.warning("Invalid appointment [1-" + results.size() + "]\n");
@@ -323,6 +321,7 @@ public class GUI {
         System.out.println(msg + "\n");
         List<Appointment> results = search();
         if (results != null) {
+            Collections.sort(results);
             System.out.println();
             System.out.println("RESULTS FOUND: " + results.size());
             if (results.isEmpty()) {
@@ -335,7 +334,6 @@ public class GUI {
     private void searchAction() {
         List<Appointment> results = methodsBasedOnSearch("Main Menu > Search an existing appointment for...");
         if (results != null && !results.isEmpty()) {
-            Collections.sort(results);
             printBook(results, false);
         }
     }
@@ -352,7 +350,7 @@ public class GUI {
             try {
                 switch (choose(2, true)) {
                     case 1:
-                        String date = InputUtils.readString("Date: ");
+                        String date = InputUtils.readString("Date (dd-MM-yyyy): ");
                         return book.search(Book.forDate(date));
                     case 2:
                         String description = InputUtils.readString("Description (with): ");
@@ -418,7 +416,6 @@ public class GUI {
             Appointment appointment = book.add(date, startTime, duration, description, place);
             if (appointment == null) {
                 saved = false;
-
             } else {
                 printCollision(appointment);
             }

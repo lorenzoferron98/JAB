@@ -2,6 +2,9 @@ import jab.GUI;
 
 /**
  * Main class for JAB.
+ *
+ * @author Lorenzo Ferron
+ * @version 2019.02.14
  */
 public class Main {
 
